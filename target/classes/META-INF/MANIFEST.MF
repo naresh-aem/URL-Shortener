@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: nychow
+Build-Jdk: 11.0.15
+Implementation-Title: URLSortnerDemo
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.apple
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/URLSortnerDemo
+ /
+Created-By: Maven Integration for Eclipse
+
