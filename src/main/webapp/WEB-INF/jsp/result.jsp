@@ -10,7 +10,7 @@
 		<h1>Result</h1>
 	</div>
 	<div>
-		<a href="http://localhost:8080/url-shortener.html"
+		<a href="http://localhost:8080/"
 			title="Shortened URL List"
 			<span class="bold">  Shorten new Url </span>></a> <br /> <br />
 		<ul>

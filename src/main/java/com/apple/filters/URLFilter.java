@@ -21,12 +21,12 @@ import com.apple.service.URLManipulate;
 @Component
 public class URLFilter extends GenericFilterBean  {
 	
-
 	Logger LOG = LoggerFactory.getLogger(URLFilter.class);
 	
 	@Autowired
 	private URLManipulate urlContent;
- 
+	
+	//Filter to check short url requests and redirect to actual url
     @Override
     public void doFilter(ServletRequest request,
                         ServletResponse response,
@@ -35,15 +35,21 @@ public class URLFilter extends GenericFilterBean  {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
  
-        LOG.error("Requested URI is: " + req.getRequestURI());
+        LOG.info("Requested URI is: " + req.getRequestURI());
         if(req.getRequestURI().startsWith("/r/")){
-            LOG.error("Request longURL for: " + "http://localhost:8080"+req.getRequestURI());
-        		ShortenedURLs redirectUrlObj = urlContent.findShortURL("http://localhost:8080"+req.getRequestURI());
-        		
-        		if(null != redirectUrlObj)
-        			res.sendRedirect( redirectUrlObj.getLongUrl());
-        		else
-        			res.sendRedirect("http://localhost:8080/404.html");
+            LOG.info("Request longURL for: " + "http://localhost:8080"+req.getRequestURI());
+    		ShortenedURLs redirectUrlObj = null;
+    		
+    		try {
+				redirectUrlObj = urlContent.findShortURL("http://localhost:8080"+req.getRequestURI());
+			} catch (Exception e) {
+				LOG.error("Error while retrieving main URL in Filters");
+			}
+    		
+    		if(null != redirectUrlObj)
+    			res.sendRedirect( redirectUrlObj.getLongUrl());
+    		else
+    			res.sendRedirect("http://localhost:8080/404.html");
     	}
         else
         	chain.doFilter(request, response);
