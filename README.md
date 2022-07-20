@@ -28,8 +28,13 @@ Used JPA to do data manipulations.
 info on code-
 
 Entity/Model : ShortenerURLs.java
+
 Controller: URLController.java
+
 Data Repository: URLRepository.java
+
 Service: URLManipulate.java
+
 JSP: url-shortener.html, shortened-url-result.html, all-shortened-urls.html
+
 styles: url-shortener.css
