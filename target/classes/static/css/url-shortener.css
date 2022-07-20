@@ -18,8 +18,18 @@ ul {
 	list-style: none;
 }
 
-ul li span{
+ul li a{
 	color: #4CAF50;
+}
+ul li a:hover{
+	color: #000;
+}
+.div-height{
+	height: 150px;
+}
+
+.bold{
+	font-weight: bold;
 }
 
 input[type=submit] {

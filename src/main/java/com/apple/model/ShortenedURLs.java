@@ -15,6 +15,9 @@ public class ShortenedURLs {
 
 	private String longUrl;
 	
+	
+	private String message="";
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(longUrl, shortUrl);
@@ -42,8 +45,13 @@ public class ShortenedURLs {
 	
 	public void setShortUrl(String shortUrl) { this.shortUrl = shortUrl; }
 	
+
+	public String getMesssage() { return message; }
+	
+	public void setMessage(String message) { this.message = message; }
+	
 	@Override
 	public String toString() {
-		return "ShortenedURLs [id=" + id + ", longUrl=" + longUrl + ", shortUrl=" + shortUrl + "]";
+		return "ShortenedURLs [id=" + id + ", longUrl=" + longUrl + ", shortUrl=" + shortUrl +", message=" + message + "]";
 	}
 }

@@ -14,4 +14,6 @@ public interface URLManipulate {
 	
 	public abstract ShortenedURLs findShortURL(String shortUrl);
 
+	public abstract void deleteAllURLs();
+
 }

@@ -29,7 +29,6 @@ public class URLManipulateImpl implements URLManipulate {
 
 	@Override
 	public ShortenedURLs saveURL(ShortenedURLs inputUrl){
-		LOG.error(" ----------------    "+inputUrl.toString());
 		String longUrl= inputUrl.getLongUrl();
 		boolean isMatch = Pattern.compile("^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$")
 	               .matcher(longUrl)
@@ -42,15 +41,21 @@ public class URLManipulateImpl implements URLManipulate {
 				currentItem = new ShortenedURLs();
 				currentItem.setLongUrl(longUrl);
 				currentItem.setShortUrl(shortUrl);
+				currentItem.setMessage("");
 				urlRepo.save(currentItem);
 			}
-			else
+			else {
+				currentItem.setMessage("URL already exists!!");
 				LOG.error("URL already exists!!");
-
-			LOG.error(" ---------------- current   "+currentItem.toString());
+			}
 		}
-		else 
+		else {
+			currentItem = new ShortenedURLs();
+			currentItem.setLongUrl(longUrl);
+			currentItem.setLongUrl("");
+			currentItem.setMessage("Please enter a valid url!");
 			LOG.error("Please enter a valid url!");
+		}
 		
 		return currentItem;
 	}
@@ -73,13 +78,18 @@ public class URLManipulateImpl implements URLManipulate {
 			return null;
 	}
 	
+	@Override
+	public void deleteAllURLs() {
+		urlRepo.deleteAll();
+	}
+	
 	private String getShortUrl() {
 		final String SOURCE = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 		SecureRandom securerand =new SecureRandom();
 		StringBuilder sb = new StringBuilder(12); 
 		for (int i = 0; i < 12; i++) 
 			sb.append(SOURCE.charAt(securerand.nextInt(SOURCE.length())));
-		String shortUrl = "https://new.short.url/"+sb.toString();
+		String shortUrl = "http://localhost:8080/r/"+sb.toString();
 		ShortenedURLs recShortObj = findShortURL(shortUrl);
 		if(null != recShortObj) 
 			getShortUrl();
